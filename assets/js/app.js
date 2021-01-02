@@ -1,6 +1,6 @@
 / Define SVG area dimensions
-var svgWidth = 960;
-var svgHeight = 660;
+var svgWidth = 900;
+var svgHeight = 700;
 
 // Define the chart's margins as an object
 var chartMargin = {
@@ -32,7 +32,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       
       // Parse data
       var state = importedData.map(d => d.state);
-      console.log("state");
+      console.log("State");
       console.log(state);
       var abbr = importedData.map(d => d.abbr);
       console.log("abbr");
@@ -112,14 +112,14 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       .attr("x",0 - (chartHeight / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .attr("font-size", "16 px")
+      .attr("font-size", "15 px")
       .attr("font-weight", 700)
       .text("Lacks Healthcare (%)");  
 
     chartGroup.append("text")
       .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top - 50})`)
       .style("text-anchor", "middle")
-      .attr("font-size", "16 px")
+      .attr("font-size", "15 px")
       .attr("font-weight", 700)
       .text("In Poverty (%)");
 
