@@ -11,7 +11,7 @@ var chartMargin = {
   
 };
 
-// Define chart area dimensions
+// Defined chart area dimensions
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
@@ -22,7 +22,7 @@ var svg = d3
   .attr("height", svgHeight)
   .attr("width", svgWidth);
 
-// Append a group to the SVG area 
+// Appending the SVG area 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
@@ -31,9 +31,9 @@ var chartGroup = svg.append("g")
 d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log(importedData);
       
-      // Parse data
+      // Parsing data
       var state = importedData.map(d => d.state);
-      console.log("State");
+      console.log("state");
       console.log(state);
       var abbr = importedData.map(d => d.abbr);
       console.log("abbr");
@@ -118,7 +118,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
 
     chartGroup.append("text")
       .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top - 50})`)
-      .style("text-anchor", "middle")
+      .style("text-anchor", "end")
       .attr("font-size", "10 px")
       .attr("font-weight", 700)
       .text("In Poverty (%)");
