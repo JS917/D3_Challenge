@@ -1,20 +1,21 @@
-/ Define SVG area dimensions
-var svgWidth = 900;
-var svgHeight = 700;
+//set the size of the svg
+var svgWidth = 1000;
+var svgHeight = 500;
 
 // Define the chart's margins as an object
 var chartMargin = {
-  top: 100,
-  right: 100,
-  bottom: 100,
+  top: 30,
+  right: 40,
+  bottom: 90,
   left: 100
+  
 };
 
 // Define chart area dimensions
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
-// Select scatter id, append SVG area to id, and set dimensions
+// Created the SVG wrapper
 var svg = d3
   .select("#scatter")
   .append("svg")
@@ -26,7 +27,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
 
-// Load data from data.csv
+// Import the data from data.csv
 d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log(importedData);
       
@@ -56,7 +57,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log("smokes");
       console.log(smokes);
 
-    // Turn strings into intergers/floats
+    // Turn strings into intergers & floats
       importedData.forEach(function(data) {
       data.income = +data.income;
       data.healthcare = +data.healthcare;
@@ -92,10 +93,10 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "green")
+    .attr("fill", "blue")
     .attr("opacity", ".5");
 
-    // Add text to circles
+    // Add circle texts
     chartGroup.selectAll("#circleText")
     .data(importedData)
     .enter()
@@ -103,23 +104,22 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .attr("dx", d => xLinearScale(d.poverty) - 12)
     .attr("dy", d => yLinearScale(d.healthcare) + 5)
     .attr("stroke", "white")
-    .text(d => d.abbr);
+    .text(d => d.abbr)
+    .attr("class", "stateText");
 
-    // Create axes labels
-    chartGroup.append("text")
+      // create axis labels 
+      chartGroup.append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - chartMargin.left + 30)
-      .attr("x",0 - (chartHeight / 2))
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .attr("font-size", "15 px")
-      .attr("font-weight", 700)
-      .text("Lacks Healthcare (%)");  
+      .attr("class", "aText")
+      .text("Lacks Healthcare (%)");
 
     chartGroup.append("text")
       .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top - 50})`)
       .style("text-anchor", "middle")
-      .attr("font-size", "15 px")
+      .attr("font-size", "10 px")
       .attr("font-weight", 700)
       .text("In Poverty (%)");
 
